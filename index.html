@@ -61,6 +61,7 @@ section > p{color:var(--fg2)}
 .stepper{counter-reset:step}
 .stepper li.done::before{content:"✓";color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
 .stepper li.now::before{color:var(--accent-fg);background:var(--now);border-color:var(--now)}
+.stepper .t,.stepper .d{grid-column:2}
 .stepper .t{font-weight:600;font-size:13px;color:var(--fg)}
 .stepper li.now .t{color:var(--fg)}
 .stepper .d{color:var(--fg2);font-size:12.5px;margin-top:1px}
