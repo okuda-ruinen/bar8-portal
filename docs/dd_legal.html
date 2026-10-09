@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>DD 許認可・法務チェックリスト</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"><style>
+/* Layout: 左に細い固定ナビ、右に読みものの一列。モダンな角丸カードは最小限にして、太いサンセリフと1色の差し色で締める */
+:root{--bg:#f6f6f4;--surface:#ffffff;--fg:#141414;--muted:#6b6b66;--line:#e4e4df;--accent:#e4374d;--accent-ink:#ffffff;--soft:#f0f0ec;--ok:#1f8a4c;--chip:#ebebe6;
+--font-display:'Bricolage Grotesque','Zen Kaku Gothic New',system-ui,sans-serif;--font-body:'Zen Kaku Gothic New',"Hiragino Sans","Yu Gothic",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111112;--surface:#1a1a1c;--fg:#f1f1ee;--muted:#9c9c96;--line:#2c2c30;--accent:#ff5468;--accent-ink:#111112;--soft:#202023;--ok:#5fcf8a;--chip:#26262a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111112;--surface:#1a1a1c;--fg:#f1f1ee;--muted:#9c9c96;--line:#2c2c30;--accent:#ff5468;--accent-ink:#111112;--soft:#202023;--ok:#5fcf8a;--chip:#26262a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15.5px;line-height:1.85;margin:0;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:4px}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.shell{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;max-width:1080px;margin:0 auto;padding-block:36px 80px;padding-inline:20px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:13px}
+.side .brand{font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-.02em;margin:0 0 4px}
+.side .sub{color:var(--muted);margin:0 0 20px}
+.side nav{display:grid;gap:2px}
+.side nav a{text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:6px;display:block}
+.side nav a:hover{background:var(--soft);color:var(--fg)}
+.side .foot{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
+main{min-width:0;display:grid;gap:56px}
+section{scroll-margin-top:24px}
+.eyebrow{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+h2{font-family:var(--font-body);font-weight:900;font-size:24px;line-height:1.3;letter-spacing:-.01em;margin:0 0 16px;text-wrap:balance}
+h3{font-weight:700;font-size:16px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:66ch}
+.lead{font-size:18px;line-height:1.75;color:var(--fg);max-width:60ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--chip);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:500}
+.chip.now{background:var(--accent);color:var(--accent-ink)}
+.kv{display:grid;grid-template-columns:140px minmax(0,1fr);gap:0;border-top:1px solid var(--line);font-size:15px}
+.kv dt,.kv dd{padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.kv dt{color:var(--muted);font-weight:500}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.list li{display:grid;grid-template-columns:10px minmax(0,1fr);gap:14px;align-items:start}
+.list li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:11px}
+.list b{font-weight:700}
+.stepper{display:grid;gap:0;border-left:2px solid var(--line);margin-left:9px}
+.stepper li{list-style:none;position:relative;padding:0 0 22px 26px}
+.stepper li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--line)}
+.stepper li.done::before{background:var(--ok);border-color:var(--ok)}
+.stepper li.now::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 20%,transparent)}
+.stepper .t{font-weight:700}
+.stepper .d{color:var(--muted);font-size:14px}
+.stepper .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--chip);margin-left:8px;vertical-align:2px}
+.stepper li.now .tag{background:var(--accent);color:var(--accent-ink)}
+.stepper li.done .tag{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.gate b{display:block;font-size:16px;margin-bottom:6px}
+.gate p{font-size:14px;color:var(--muted);margin:0}
+.facts{display:grid;gap:14px}
+.fact{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 18px;border-radius:10px;background:var(--soft);min-width:0}
+.fact b{font-size:16px}
+.fact p{margin:0;font-size:14.5px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;min-width:0;text-decoration:none;color:inherit;transition:border-color .15s ease,transform .15s ease}
+.doc:hover{border-color:var(--accent);transform:translateY(-2px);color:inherit}
+@media (prefers-reduced-motion:reduce){.doc{transition:none}.doc:hover{transform:none}}
+.doc .idx{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.doc h3{font-size:17px;margin:0}
+.doc p{font-size:14px;color:var(--muted);margin:0}
+.doc .go{font-weight:700;font-size:14px;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:700;background:var(--soft);white-space:nowrap}
+.doclink{font-size:13px;color:var(--muted);margin-top:8px}
+@media (max-width:760px){.shell{grid-template-columns:1fr;gap:28px}.side{position:static}.side nav{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}.kv{grid-template-columns:1fr}.kv dt{padding-bottom:0;border-bottom:0}.kv dd{padding-top:4px}}
+/* 資料ページ */
+.docpage{max-width:820px;margin:0 auto;padding-block:32px 80px;padding-inline:20px}
+.docpage .crumb{font-size:13px;color:var(--muted);margin-bottom:18px}
+.docpage h1{font-size:clamp(28px,5vw,40px);margin-bottom:24px}
+.docpage h2{font-size:21px;margin:40px 0 12px;padding-top:14px;border-top:2px solid var(--fg)}
+.docpage h3{font-size:16px;margin:24px 0 8px}
+.docpage ul,.docpage ol{padding-left:1.4em;margin:0 0 14px}
+.docpage li{margin:4px 0}
+.docpage table{margin:8px 0 18px}
+.docpage code{font-family:ui-monospace,Menlo,monospace;font-size:.9em;background:var(--soft);padding:1px 5px;border-radius:4px}
+.docpage footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style></head>
+<body><div class="docpage"><nav class="crumb"><a href="../index.html">BAR8プロジェクト ポータルに戻る</a></nav><h1>BAR8 買収 DD チェックリスト（許認可・法務編）</h1>
+<p>作成：2026-10-09　前提：主たる承継者＝株式会社ティーツーシー（本体で譲り受けるか子会社を設立するかは未決）・対価はほぼゼロ・現オーナーには全て確認できる関係・収支は後回し　分類：正本</p>
+<p>凡例：☐ 未着手／確認済みは「✔ 日付・確認者・根拠」を書き足す。【要確認】＝一次情報で未確定。出典は末尾。</p>
+<h3>A. まず現状を確定する（オーナーへの質問票）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>質問</th>
+<th>なぜ聞くか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>☐ 飲食店営業許可証の原本（許可番号・有効期限・施設の所在地・営業者名）</td>
+<td>承継の前提。期限切れなら承継の意味がない</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>☐ 営業許可の「営業者」は個人名か（屋号で取っていないか）</td>
+<td>譲渡人の特定</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>☐ 深夜0時以降に酒類を提供しているか。提供しているなら<strong>深夜酒類提供飲食店営業の届出</strong>を警察署に出しているか（控えの有無）</td>
+<td>出していなければ無届営業＝引き継ぐ前に整理が要る</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>☐ 接客の実態：スタッフが客の隣や向かいに座って一緒に飲む・継続して談笑する・お酌して居続ける、があるか</td>
+<td>あれば風営法上の「接待」＝風俗営業許可が必要になり話が変わる（§D）</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>☐ 営業時間（開店・閉店・最終提供）、定休、イベント営業（DJ・ダンス・ライブ）の有無</td>
+<td>ダンス・ショーは別の規制に触れうる</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>☐ 食品衛生責任者は誰か（修了証）</td>
+<td>承継後は譲受法人側で選任し直す</td>
+</tr>
+<tr>
+<td>A7</td>
+<td>☐ 消防：防火対象物使用開始届の控え、防火管理者の選任有無、収容人員の数、消防署の立入結果</td>
+<td>雑居ビル4Fは消防の目が厳しい</td>
+</tr>
+<tr>
+<td>A8</td>
+<td>☐ 賃貸借契約書の原本、保証金預り証、契約者名義、更新時期</td>
+<td>名義変更の可否が最大の関門</td>
+</tr>
+<tr>
+<td>A9</td>
+<td>☐ 従業員・アルバイトの有無、雇用形態</td>
+<td>承継対象と労務の確認</td>
+</tr>
+<tr>
+<td>A10</td>
+<td>☐ 酒類の持ち帰り販売・通販をしているか</td>
+<td>していれば酒類販売業免許の話になる</td>
+</tr>
+<tr>
+<td>A11</td>
+<td>☐ 音楽の利用（BGM・ライブ）、JASRAC 等の契約</td>
+<td>契約の引継ぎ</td>
+</tr>
+<tr>
+<td>A12</td>
+<td>☐ Instagram・Google ビジネスプロフィールの管理者と引継ぎ方法</td>
+<td>営業権の実体</td>
+</tr>
+<tr>
+<td>A13</td>
+<td>☐ 近隣・ビル管理会社・警察からの指導や苦情の履歴</td>
+<td>隠れた制約</td>
+</tr>
+<tr>
+<td>A14</td>
+<td>☐ 売却（譲渡）の希望時期と、引継ぎで店に立てる期間</td>
+<td>スケジュールの起点</td>
+</tr>
+</tbody>
+</table></div>
+<h3>B. 飲食店営業許可（保健所）</h3>
+<p><strong>結論：2023年12月13日以降の事業譲渡なら、新規に許可を取り直さず「譲渡による地位承継届」で引き継げる</strong>（食品衛生法第56条第2項）。論点ロングリスト初版の「承継不可」は誤りだったので訂正済み。</p>
+<ul>
+<li>☐ B1 承継の条件を満たすか：<strong>営業の全部を譲渡</strong>すること（一部譲渡は不可）。BAR8 の営業を丸ごと引き継ぐなら該当</li>
+<li>☐ B2 施設・設備を変えないこと。内装や厨房を改修するなら、承継後に変更届または新規許可の要否を保健所に確認【要確認：改修の範囲次第】</li>
+<li>☐ B3 <strong>譲受人は法人（T2C 本体または新設子会社）になるため、個人→法人の譲渡で地位承継が使えるか</strong>を仙台市青葉区衛生課に事前相談。東京都の案内には明記がないため、仙台市で確定させる【要確認・最優先】。使えない場合は法人名義で新規許可申請（施設基準の検査あり）</li>
+<li>☐ B4 必要書類：地位承継届（仙台市 様式第8号）＋譲渡の事実を証する書類（<strong>譲渡契約書または覚書の写し</strong>）。契約書が無い場合は仙台市の参考様式が使える</li>
+<li>☐ B5 届出先：施設所在地の区の衛生課（青葉区）。手数料なし。譲渡後「遅滞なく」届け出る</li>
+<li>☐ B6 承継した許可の有効期限は<strong>元の許可の期限のまま</strong>【要確認：仙台市で確認】。期限が近ければ更新の段取りを同時に組む</li>
+<li>☐ B7 食品衛生責任者を譲受側で選任（講習修了者がいなければ受講）。変更届の要否を確認</li>
+<li>☐ B8 譲渡契約書に「食品衛生法上の営業の全部を譲渡する」旨と譲渡日を明記（B4 の証拠書類になる）</li>
+</ul>
+<h3>C. 深夜酒類提供飲食店営業（警察署）</h3>
+<p><strong>結論：届出は営業者に紐づくため引き継げない。譲受側が改めて届出し、現オーナーは廃止届を出す</strong>【要確認：廃止・新規の順序と空白期間の扱いを仙台中央警察署に確認】</p>
+<ul>
+<li>☐ C1 届出の要否：<strong>午前0時以降に酒類を提供する</strong>なら必要。バーとしての通常営業は該当する前提で動く</li>
+<li>☐ C2 期限：<strong>営業開始の10日前まで</strong>に、営業所を管轄する警察署の生活安全課へ（宮城県公安委員会宛）。手数料なし</li>
+<li>☐ C3 必要書類（宮城県警）：開始届出書（別記様式第47号・48号）、営業の方法、営業所の平面図、住民票の写し（本籍記載・マイナンバーなし）、法人なら定款と登記事項証明書、<strong>用途地域の確認書類</strong>、<strong>飲食店営業許可証の写し</strong>（→ B の承継が先に完了している必要がある）</li>
+<li>☐ C4 用途地域：住居系地域では届出不可。国分町3-6-6 の用途地域を仙台市の都市計画情報で確認し、証明書類を取得【要確認：商業地域の可能性が高いが未確認】</li>
+<li>☐ C5 営業所の構造・設備基準：客室の見通しを妨げる設備（高さ1m以上の仕切り等）がない／風俗を害するおそれのある装飾がない／客室の照度が20ルクス以上／ダンス用の踊り場がない／客室面積の基準。<strong>平面図は実測で作る</strong>（図面と現況の不一致は受理されない）</li>
+<li>✔ C6 <strong>営業時間（現在1時まで営業）の整理・2026-10-09 条文確認済み</strong>：宮城県風営法施行条例の「午前1時まで営業できる地域」（第5条：仙台市青葉区一番町四丁目（三番、四番、九番及び十番）及び国分町二丁目（三番を除く））は<strong>風俗営業（法第13条第1項）の営業時間の特例</strong>であり、BAR8（風俗営業ではない・国分町三丁目）には関係しない。<strong>深夜酒類提供飲食店営業には条例上の閉店時刻の上限は無く</strong>（条例第22条は「住居地域等では営んではならない」という場所の制限のみ）、<strong>0時以降の提供に届出があれば1時まで営業して問題ない</strong>。したがって確認すべきは「現オーナーが深夜酒類提供の届出を出しているか（A3）」と「用途地域が住居地域等でないか（C4）」の2点に絞られる</li>
+<li>☐ C7 現オーナーの届出控えがあれば、平面図・営業の方法をそのまま下敷きにできる（構造が変わっていないことが前提）</li>
+<li>☐ C8 届出後の遵守事項：18歳未満の深夜立入禁止表示、騒音・振動の基準、客引き禁止、営業の方法の変更時は変更届</li>
+</ul>
+<h3>D. 風営法の該当性（2026-10-09 本人確認：風営法対象の店ではない＝接待なし。以下は承継後の運用で接待に踏み込まないための基準として残す）</h3>
+<ul>
+<li>☐ D1 「接待」の判定：警察庁の解釈運用基準では「歓楽的雰囲気を醸し出す方法により客をもてなすこと」。具体的には、特定少数の客の近くに付いて継続して談笑の相手をする、お酌をしてその場に居続ける、等が該当</li>
+<li>☐ D2 該当しない例：カウンター内で注文に応じて提供し、挨拶や若干の世間話をする程度。お酌をしても速やかに離れる。不特定の客への声かけ</li>
+<li>☐ D3 BAR8 の運用で接待に当たる行為が「常態」か「たまに」かをオーナーと具体的に突き合わせる（A4）。現在「一緒に飲む」運用があるなら、承継後の運用ルールを決める</li>
+<li>☐ D4 接待を続けたいなら風俗営業（1号）許可が必要で、深夜0時以降（特例区域外）の営業は不可になる＝<strong>深夜届出と風俗営業許可は両立しない</strong>。どちらの店にするかを決める</li>
+<li>☐ D5 ダンス・ショーパブ的な営業をしない限り、他の風営法区分は不要【前提】</li>
+</ul>
+<h3>E. 消防（仙台市消防局・青葉消防署）</h3>
+<ul>
+<li>☐ E1 <strong>管理権原者の変更</strong>：テナントの事業者が変わるので、防火管理の管理権原者が変わる。仙台市では「防火対象物・防災管理対象物管理権原者変更届出書」があり、変更前の管理権原者（現オーナー）が届け出る建前【要確認：特例認定物件のみの届出か、一般物件の扱い】</li>
+<li>☐ E2 <strong>防火対象物使用開始届</strong>：用途・事業者が変わる場合に「使用開始の7日前まで」に消防署長へ。内装を変えない承継でも新事業者として要否を青葉消防署予防課に確認【要確認】</li>
+<li>☐ E3 防火管理者：収容人員が<strong>30人以上</strong>（飲食店は特定用途）なら選任と届出、消防計画の作成が必要。BAR8 の収容人員（席数＋従業員）を数える。30人未満なら不要</li>
+<li>☐ E4 雑居ビル4Fの固有リスク：避難経路（階段が1つか2つか）、誘導灯・消火器・自動火災報知設備の点検記録、ビル全体の防火管理者（統括）の有無。点検報告の履歴をビル管理会社に請求</li>
+<li>☐ E5 カーテン・じゅうたん等の防炎物品の表示</li>
+<li>☐ E6 近年の消防署立入検査の指摘事項（A7）</li>
+</ul>
+<h3>F. 賃貸借（最大の関門）</h3>
+<ul>
+<li>☐ F1 契約書の「譲渡・転貸禁止」条項と「賃貸人の書面承諾」の要否。承諾なしの地位移転は解除事由になりうる</li>
+<li>☐ F2 承諾の取り方：①現契約の名義変更（契約者を譲受側に変更）②現契約を合意解約して譲受側と新規契約、のどちらを賃貸人が求めるか。新規契約だと保証金・賃料・原状回復条件が改定されうる</li>
+<li>☐ F3 保証金：現オーナーへの返還と譲受側の差し入れのタイミング（承継時に精算するのが通常）</li>
+<li>☐ F4 用途：契約上の用途が「飲食店（バー）」「深夜営業可」となっているか。ビルの管理規約で深夜営業・音の制限がないか</li>
+<li>☐ F5 原状回復の範囲：前テナントからの居抜き部分と現オーナーの造作、どこまでが退去時の負担か。<strong>買収時点で退去コストを見積もる</strong></li>
+<li>☐ F6 連帯保証人・保証会社の切替</li>
+<li>☐ F7 更新時期と更新料、賃料改定の履歴</li>
+<li>☐ F8 ビルの築年・耐震・エレベーター点検・他テナントの業種（風俗店の有無は警察・消防の見方に影響）</li>
+</ul>
+<h3>G. 譲渡契約・営業権・その他の契約</h3>
+<ul>
+<li>☐ G1 事業譲渡契約書（または覚書）：対価ゼロに近くても<strong>必ず書面にする</strong>。保健所の地位承継届の証拠書類になるため、「営業の全部の譲渡」「譲渡日」「譲渡対象（内装・什器・在庫・屋号・SNS・レシピ・取引先契約）」を列挙</li>
+<li>☐ G2 無償または低額譲渡の税務：個人→個人／個人→法人で、譲渡側の譲渡所得・受贈側の贈与税や受贈益の扱いが変わる。金額が小さくても税理士に一度確認【要確認】</li>
+<li>☐ G3 屋号「BAR8」：商標登録の有無を J-PlatPat で確認。登録がなければ使用は自由だが、第三者の登録がないかも確認</li>
+<li>☐ G4 Instagram @bar8_2025：アカウント譲渡は Meta の規約上グレー。実務は管理者の追加・メール/電話の変更で引き継ぐ。Google ビジネスプロフィールはオーナー権限の移譲機能あり</li>
+<li>☐ G5 酒類卸・食材・決済端末・予約サイト・JASRAC：各契約の名義変更または新規契約</li>
+<li>☐ G6 リース物件（製氷機・冷蔵庫・POS・音響）：リース会社の承諾なしに移転できない。リース契約一覧を取る</li>
+<li>☐ G7 従業員がいる場合：雇用契約を承継するか再雇用するか、本人同意</li>
+<li>☐ G8 現オーナーの競業避止・顧客引抜き防止：関係が近くても書面にする（期間・地域を限定して現実的に）</li>
+<li>☐ G9 クロージング後の表明保証（簿外債務・無届営業・行政指導なし）</li>
+</ul>
+<h3>H. 税務・設立</h3>
+<ul>
+<li>☐ H1 承継スキームの決定：T2C 本体（案A）か新設子会社（案B）か。<strong>B3 の「法人でも承継可か」の回答が先</strong>（論点ロングリスト §2）</li>
+<li>☐ H1-2 案A：T2C の定款の事業目的に「飲食店の経営」等を追加（株主総会決議＋変更登記）。賃貸借・許認可・届出の名義はすべて T2C</li>
+<li>☐ H1-3 案B：子会社の設立（商号・本店（仙台か川崎か）・資本金・出資比率・役員・事業目的）→ 登記完了後に賃貸借契約・地位承継届・深夜届出を子会社名義で。賃貸人が親会社保証を求める可能性に備える</li>
+<li>☐ H2 開業届／法人設立届、青色申告、消費税の課税事業者選択とインボイス登録の要否（客が経費精算する店ならインボイスが効く）</li>
+<li>☐ H3 酒類販売業免許：店内提供のみなら不要。持ち帰り・通販をするなら必要（A10）</li>
+<li>☐ H4 償却資産・固定資産税（内装・什器を引き継いだ場合）</li>
+</ul>
+<h3>I. 手続きの順序（案・依存関係）</h3>
+<ol>
+<li>A の質問票でオーナーから現状と書類を集める</li>
+<li>賃貸人へ名義変更の打診（F1〜F2）。ここで No なら止まる</li>
+<li>法人を作るか決める（H1）。保健所に「法人への譲渡で承継できるか」を事前相談（B3）</li>
+<li>譲渡契約書（覚書）を作る（G1）。譲渡日を決める</li>
+<li>保健所へ地位承継届（B4〜B5）→ 承継後の許可証（または証明）を入手</li>
+<li>警察署へ深夜酒類提供の届出（C2〜C3）。<strong>営業開始10日前まで</strong>。現オーナーは廃止届</li>
+<li>消防へ管理権原者変更／使用開始届（E1〜E2）</li>
+<li>各契約の名義変更（G5〜G6）、SNS 引継ぎ（G4）</li>
+<li>税務署等への届出（H2）</li>
+</ol>
+<h3>J. 未確認事項（一次情報で潰す）</h3>
+<ul>
+<li>仙台市：法人への譲渡で地位承継が使えるか／承継後の許可期限の扱い／改修時の扱い（青葉区衛生課 または 健康福祉局生活衛生課 022-214-8205）</li>
+<li>仙台中央警察署：深夜酒類提供の廃止・新規届出の順序と、営業継続中の空白期間の扱い（宮城県警本部生活安全企画課 022-221-7171）</li>
+<li>仙台市消防局青葉消防署：事業者交代時の使用開始届・管理権原者変更届の要否、収容人員の算定</li>
+<li>国分町3-6-6 の用途地域（仙台市都市計画情報）</li>
+<li>無償譲渡の税務（税理士）</li>
+</ul>
+<h3>出典</h3>
+<ul>
+<li>事業譲渡による地位承継（制度の説明・全部譲渡の条件・遅滞なく届出）：東京都保健医療局 https://www.hokeniryo1.metro.tokyo.lg.jp/shokuhin/jigyojoto.html</li>
+<li>仙台市「譲渡による地位承継届」（様式第8号・届出先・手数料なし・法第56条第2項）：https://www.city.sendai.jp/sekatsuese-shokuhin/download/bunyabetsu/ese/kyoka/jyouto.html</li>
+<li>宮城県警察「深夜における酒類提供飲食店営業の届出」（10日前・必要書類・住居地域等の禁止）：https://www.police.pref.miyagi.jp/seian/kyoninka/fuuzokumenyu/shinyasaketeikyou.html</li>
+<li>仙台市「防火対象物使用開始届出書」：https://www.city.sendai.jp/yobo-shido/download/bunyabetsu/bosai/kasai/kaishi.html</li>
+<li>仙台市「防火対象物・防災管理対象物管理権原者変更届出書」：https://www.city.sendai.jp/yobo-shido/download/bunyabetsu/bosai/kasai/kanriken.html</li>
+<li>風営法の「接待」の解釈（行政書士事務所の解説・警察庁解釈運用基準の引用）：https://www.meg-law.jp/column/274/ ／ https://www.windsgyosei.com/column/detail/id=232</li>
+<li>宮城県風営法施行条例の条文（第5条 午前1時区域・第6条 営業時間制限・第22条 深夜酒類提供の禁止区域。転載サイト、原典は宮城県例規集）：https://www.huuzokukyoka.com/風営法-関連条文/宮城県施行条例/</li>
+</ul><footer>元の文書はClaude Projectのpersonal/new-project/bar8_sendai/にあるMarkdownです。このページはそこから生成しています。</footer></div></body></html>

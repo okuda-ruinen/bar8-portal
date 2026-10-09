@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>現地視察・ヒアリング項目</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"><style>
+/* Layout: 左に細い固定ナビ、右に読みものの一列。モダンな角丸カードは最小限にして、太いサンセリフと1色の差し色で締める */
+:root{--bg:#f6f6f4;--surface:#ffffff;--fg:#141414;--muted:#6b6b66;--line:#e4e4df;--accent:#e4374d;--accent-ink:#ffffff;--soft:#f0f0ec;--ok:#1f8a4c;--chip:#ebebe6;
+--font-display:'Bricolage Grotesque','Zen Kaku Gothic New',system-ui,sans-serif;--font-body:'Zen Kaku Gothic New',"Hiragino Sans","Yu Gothic",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111112;--surface:#1a1a1c;--fg:#f1f1ee;--muted:#9c9c96;--line:#2c2c30;--accent:#ff5468;--accent-ink:#111112;--soft:#202023;--ok:#5fcf8a;--chip:#26262a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111112;--surface:#1a1a1c;--fg:#f1f1ee;--muted:#9c9c96;--line:#2c2c30;--accent:#ff5468;--accent-ink:#111112;--soft:#202023;--ok:#5fcf8a;--chip:#26262a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15.5px;line-height:1.85;margin:0;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:4px}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.shell{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;max-width:1080px;margin:0 auto;padding-block:36px 80px;padding-inline:20px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:13px}
+.side .brand{font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-.02em;margin:0 0 4px}
+.side .sub{color:var(--muted);margin:0 0 20px}
+.side nav{display:grid;gap:2px}
+.side nav a{text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:6px;display:block}
+.side nav a:hover{background:var(--soft);color:var(--fg)}
+.side .foot{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
+main{min-width:0;display:grid;gap:56px}
+section{scroll-margin-top:24px}
+.eyebrow{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+h2{font-family:var(--font-body);font-weight:900;font-size:24px;line-height:1.3;letter-spacing:-.01em;margin:0 0 16px;text-wrap:balance}
+h3{font-weight:700;font-size:16px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:66ch}
+.lead{font-size:18px;line-height:1.75;color:var(--fg);max-width:60ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--chip);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:500}
+.chip.now{background:var(--accent);color:var(--accent-ink)}
+.kv{display:grid;grid-template-columns:140px minmax(0,1fr);gap:0;border-top:1px solid var(--line);font-size:15px}
+.kv dt,.kv dd{padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.kv dt{color:var(--muted);font-weight:500}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.list li{display:grid;grid-template-columns:10px minmax(0,1fr);gap:14px;align-items:start}
+.list li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:11px}
+.list b{font-weight:700}
+.stepper{display:grid;gap:0;border-left:2px solid var(--line);margin-left:9px}
+.stepper li{list-style:none;position:relative;padding:0 0 22px 26px}
+.stepper li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--line)}
+.stepper li.done::before{background:var(--ok);border-color:var(--ok)}
+.stepper li.now::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 20%,transparent)}
+.stepper .t{font-weight:700}
+.stepper .d{color:var(--muted);font-size:14px}
+.stepper .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--chip);margin-left:8px;vertical-align:2px}
+.stepper li.now .tag{background:var(--accent);color:var(--accent-ink)}
+.stepper li.done .tag{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.gate b{display:block;font-size:16px;margin-bottom:6px}
+.gate p{font-size:14px;color:var(--muted);margin:0}
+.facts{display:grid;gap:14px}
+.fact{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 18px;border-radius:10px;background:var(--soft);min-width:0}
+.fact b{font-size:16px}
+.fact p{margin:0;font-size:14.5px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;min-width:0;text-decoration:none;color:inherit;transition:border-color .15s ease,transform .15s ease}
+.doc:hover{border-color:var(--accent);transform:translateY(-2px);color:inherit}
+@media (prefers-reduced-motion:reduce){.doc{transition:none}.doc:hover{transform:none}}
+.doc .idx{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.doc h3{font-size:17px;margin:0}
+.doc p{font-size:14px;color:var(--muted);margin:0}
+.doc .go{font-weight:700;font-size:14px;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:700;background:var(--soft);white-space:nowrap}
+.doclink{font-size:13px;color:var(--muted);margin-top:8px}
+@media (max-width:760px){.shell{grid-template-columns:1fr;gap:28px}.side{position:static}.side nav{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}.kv{grid-template-columns:1fr}.kv dt{padding-bottom:0;border-bottom:0}.kv dd{padding-top:4px}}
+/* 資料ページ */
+.docpage{max-width:820px;margin:0 auto;padding-block:32px 80px;padding-inline:20px}
+.docpage .crumb{font-size:13px;color:var(--muted);margin-bottom:18px}
+.docpage h1{font-size:clamp(28px,5vw,40px);margin-bottom:24px}
+.docpage h2{font-size:21px;margin:40px 0 12px;padding-top:14px;border-top:2px solid var(--fg)}
+.docpage h3{font-size:16px;margin:24px 0 8px}
+.docpage ul,.docpage ol{padding-left:1.4em;margin:0 0 14px}
+.docpage li{margin:4px 0}
+.docpage table{margin:8px 0 18px}
+.docpage code{font-family:ui-monospace,Menlo,monospace;font-size:.9em;background:var(--soft);padding:1px 5px;border-radius:4px}
+.docpage footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style></head>
+<body><div class="docpage"><nav class="crumb"><a href="../index.html">BAR8プロジェクト ポータルに戻る</a></nav><h1>BAR8 現地視察・オーナーヒアリング項目（事業DD編）</h1>
+<p>作成：2026-10-09　用途：次回の現地視察とオーナーヒアリングで、その場で埋める　分類：正本
+使い方：数字は「本人の記憶」と「記録（POS・帳簿・請求書）」を分けて書く。記録で裏が取れたものだけ ✔ にする。許認可・賃貸借・消防は <code>DD_許認可法務チェックリスト.md</code> の A 節を併用。</p>
+<h3>1. 売上 KPI（月次・開業からの全期間）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>聞き方・見方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-1</td>
+<td>月商（開業〜直近月・月別）</td>
+<td>POS/レジ締め表・通帳入金・決済明細で裏取り。記憶値との差</td>
+</tr>
+<tr>
+<td>1-2</td>
+<td>営業日数・1日あたり売上の分布</td>
+<td>平日/金土/祝前日。「最高日」「最低日」の金額と理由</td>
+</tr>
+<tr>
+<td>1-3</td>
+<td>客数・組数（1日平均・曜日別）</td>
+<td>1人客比率、2〜4名、団体</td>
+</tr>
+<tr>
+<td>1-4</td>
+<td>客単価（ドリンク／フード別）</td>
+<td>滞在時間との関係。チャージ料の有無と金額</td>
+</tr>
+<tr>
+<td>1-5</td>
+<td>時間帯別売上</td>
+<td>開店〜22時／22〜0時／0〜1時。深夜帯の比率（深夜をやめた場合の影響）</td>
+</tr>
+<tr>
+<td>1-6</td>
+<td>常連比率・上位顧客</td>
+<td>「名前で呼べる客」が売上の何割か。上位10人の来店頻度と月額。<strong>オーナー不在日の売上</strong></td>
+</tr>
+<tr>
+<td>1-7</td>
+<td>来店動機</td>
+<td>オーナー個人／ワイン／立地／価格／紹介。オーナー自身の見立て</td>
+</tr>
+<tr>
+<td>1-8</td>
+<td>季節性・イベント</td>
+<td>忘年会期、GW、お盆、周年、台風や雪の影響</td>
+</tr>
+<tr>
+<td>1-9</td>
+<td>キャッシュレス比率</td>
+<td>現金／カード／QR の比率と手数料率</td>
+</tr>
+<tr>
+<td>1-10</td>
+<td>売掛・ツケ・ボトルキープ</td>
+<td>ツケの残高と回収実績。キープボトルの本数と管理方法（承継対象の負債に近い）</td>
+</tr>
+<tr>
+<td>1-11</td>
+<td>貸切・イベント売上</td>
+<td>件数・単価・取り方</td>
+</tr>
+<tr>
+<td>1-12</td>
+<td>値上げ・メニュー改定の履歴と反応</td>
+<td>価格弾力性の手がかり</td>
+</tr>
+</tbody>
+</table></div>
+<h3>2. 原価・仕入・在庫</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>聞き方・見方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2-1</td>
+<td>ドリンク原価率・フード原価率</td>
+<td>月次の仕入額÷売上。記憶値と請求書で突合</td>
+</tr>
+<tr>
+<td>2-2</td>
+<td>ワインの仕入先（卸・インポーター・酒販店）と条件</td>
+<td>社名、担当者、掛け／現金、締め支払、最低ロット、配達頻度、<strong>名義変更の可否</strong></td>
+</tr>
+<tr>
+<td>2-3</td>
+<td>ビール・スピリッツ・ソフトドリンクの仕入先</td>
+<td>同上。サーバー貸与（ビール会社）の有無と条件</td>
+</tr>
+<tr>
+<td>2-4</td>
+<td>氷</td>
+<td>製氷機か氷屋か。氷屋なら業者・納品頻度・単価</td>
+</tr>
+<tr>
+<td>2-5</td>
+<td>フード食材</td>
+<td>仕入先（スーパー／業者）、頻度、仕込み担当、ロス率</td>
+</tr>
+<tr>
+<td>2-6</td>
+<td>在庫</td>
+<td>現在の在庫リスト（本数・仕入値・購入時期）、デッドストック、保管状態（温度・直射日光）、棚卸しの頻度</td>
+</tr>
+<tr>
+<td>2-7</td>
+<td>消耗品</td>
+<td>グラス・紙ナプキン・コースター・トイレ用品・洗剤の仕入先と月額</td>
+</tr>
+<tr>
+<td>2-8</td>
+<td>発注の仕組み</td>
+<td>誰が・いつ・何を見て発注するか（感覚か、在庫表か）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>3. 業者・サービス契約（名義変更が要るもの）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>業者</th>
+<th>聞くこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-1</td>
+<td>おしぼり</td>
+<td>業者名、納品頻度（週◯回）、本数、単価、回収方法、契約期間・解約条件</td>
+</tr>
+<tr>
+<td>3-2</td>
+<td>リネン・ユニフォーム</td>
+<td>有無、業者、頻度</td>
+</tr>
+<tr>
+<td>3-3</td>
+<td>ごみ・産廃</td>
+<td>事業系ごみの回収業者、頻度、月額、ビン・缶・生ごみの分別と置き場</td>
+</tr>
+<tr>
+<td>3-4</td>
+<td>グリストラップ・排水・厨房清掃</td>
+<td>清掃頻度、業者か自分か、最終清掃日</td>
+</tr>
+<tr>
+<td>3-5</td>
+<td>害虫駆除</td>
+<td>業者・頻度・最終実施日（4F雑居ビルは要確認）</td>
+</tr>
+<tr>
+<td>3-6</td>
+<td>音楽</td>
+<td>BGMの出し方（配信サービス・CD・ライブ）、JASRAC/NexTone の契約有無と月額</td>
+</tr>
+<tr>
+<td>3-7</td>
+<td>決済端末</td>
+<td>会社（Square・AirPAY・stera 等）、手数料率、入金サイクル、端末の所有・リース</td>
+</tr>
+<tr>
+<td>3-8</td>
+<td>POS・レジ</td>
+<td>製品、月額、データのエクスポート可否（DDの裏取りに使う）</td>
+</tr>
+<tr>
+<td>3-9</td>
+<td>予約・集客サービス</td>
+<td>食べログ・Google・Instagram 以外の掲載、有料プラン</td>
+</tr>
+<tr>
+<td>3-10</td>
+<td>通信</td>
+<td>Wi-Fi 回線、固定電話、月額、契約者</td>
+</tr>
+<tr>
+<td>3-11</td>
+<td>水道光熱</td>
+<td>電気・ガス・水道の契約者と月額（夏冬の差）、ビル一括か個別か</td>
+</tr>
+<tr>
+<td>3-12</td>
+<td>保険</td>
+<td>店舗総合保険・火災・PL・休業補償の有無、保険会社、保険料、名義</td>
+</tr>
+<tr>
+<td>3-13</td>
+<td>警備・鍵</td>
+<td>機械警備の有無、鍵の本数と所持者、ビルのオートロック・入退館時間</td>
+</tr>
+<tr>
+<td>3-14</td>
+<td>リース</td>
+<td>製氷機・冷蔵庫・ワインセラー・食洗機・空調・音響・看板。リース会社・残期間・月額・残債・所有権</td>
+</tr>
+<tr>
+<td>3-15</td>
+<td>税理士・会計</td>
+<td>顧問の有無、記帳方法（会計ソフト）、月額</td>
+</tr>
+<tr>
+<td>3-16</td>
+<td>その他定期支払</td>
+<td>サブスク、看板使用料、ビル共益費以外の負担</td>
+</tr>
+</tbody>
+</table></div>
+<h3>4. 設備・物件（視察で実物を見る）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>見るポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4-1</td>
+<td>席数・レイアウト</td>
+<td>カウンター席数、テーブル席数、立ち席。満席時の実際の収容。<strong>平面図との一致</strong>（深夜届出の平面図の下敷きになる）</td>
+</tr>
+<tr>
+<td>4-2</td>
+<td>厨房・バックヤード</td>
+<td>シンク数、冷蔵・冷凍、製氷機の製氷能力と年式、ワインセラーの容量と温度、食洗機</td>
+</tr>
+<tr>
+<td>4-3</td>
+<td>空調・換気</td>
+<td>年式、効き、フィルター清掃、煙・匂い</td>
+</tr>
+<tr>
+<td>4-4</td>
+<td>給排水・トイレ</td>
+<td>水圧、排水の流れ、トイレの数と状態、温水</td>
+</tr>
+<tr>
+<td>4-5</td>
+<td>電気容量</td>
+<td>ブレーカー容量、落ちた経験</td>
+</tr>
+<tr>
+<td>4-6</td>
+<td>内装の状態</td>
+<td>カウンター材、床、壁、照明。修繕が必要な箇所と見積もり</td>
+</tr>
+<tr>
+<td>4-7</td>
+<td>造作の所有区分</td>
+<td>前テナントから引き継いだもの／現オーナーが作ったもの／ビル付帯。原状回復の線引き</td>
+</tr>
+<tr>
+<td>4-8</td>
+<td>看板・サイン</td>
+<td>1F と 4F の表示、ビルの案内板、照明</td>
+</tr>
+<tr>
+<td>4-9</td>
+<td>防災</td>
+<td>消火器の期限、誘導灯、火災報知器、避難経路、防炎カーテン（許認可編 E 節）</td>
+</tr>
+<tr>
+<td>4-10</td>
+<td>ビル共用部</td>
+<td>エレベーターの年式・点検、階段、共用トイレの有無、他テナントの業種・営業時間、管理人</td>
+</tr>
+<tr>
+<td>4-11</td>
+<td>騒音・振動</td>
+<td>上下階・隣との関係、音漏れ、過去の苦情</td>
+</tr>
+<tr>
+<td>4-12</td>
+<td>搬入動線</td>
+<td>仕入・ごみ出しの動線、台車の可否、搬入時間の制限</td>
+</tr>
+<tr>
+<td>4-13</td>
+<td>携帯電波・Wi-Fi</td>
+<td>4Fでの電波状況（決済端末が止まる店は多い）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>5. 運営オペレーション（1日の流れを再現する）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>聞くこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5-1</td>
+<td>開店前</td>
+<td>何時に入るか、仕込み内容と所要時間、清掃、氷・釣銭の準備</td>
+</tr>
+<tr>
+<td>5-2</td>
+<td>営業中</td>
+<td>オペレーションの人数、ピーク時間、オーナーの立ち位置（カウンター内か客席か）</td>
+</tr>
+<tr>
+<td>5-3</td>
+<td>閉店後</td>
+<td>レジ締め、現金の保管場所と持ち帰り、売上の記録先、清掃、戸締まり、終電・帰宅手段</td>
+</tr>
+<tr>
+<td>5-4</td>
+<td>現金管理</td>
+<td>釣銭の額、金庫、銀行入金の頻度、誰が数えるか。<strong>差異が出たときの扱い</strong></td>
+</tr>
+<tr>
+<td>5-5</td>
+<td>売上記録</td>
+<td>POSか手書きか。日報の有無。見せてもらう</td>
+</tr>
+<tr>
+<td>5-6</td>
+<td>メニューとレシピ</td>
+<td>ドリンクメニュー（ワインリストの更新頻度）、フードメニュー、レシピの文書化の有無、オーナーしか作れないもの</td>
+</tr>
+<tr>
+<td>5-7</td>
+<td>仕入・発注の判断</td>
+<td>誰が、どの頻度で、何を見て</td>
+</tr>
+<tr>
+<td>5-8</td>
+<td>予約の受け方</td>
+<td>DM・電話・貸切の条件、ノーショー対応</td>
+</tr>
+<tr>
+<td>5-9</td>
+<td>クレーム・トラブル</td>
+<td>酔客、無銭、会計トラブル、ケガ、警察対応の経験</td>
+</tr>
+<tr>
+<td>5-10</td>
+<td>衛生</td>
+<td>検便・手洗い・グラス洗浄のルール、保健所の立入履歴</td>
+</tr>
+<tr>
+<td>5-11</td>
+<td>休業の判断</td>
+<td>臨時休業の頻度と理由（Instagram の告知の多さは何を意味するか）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>6. 人</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>聞くこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6-1</td>
+<td>従業員・ヘルプ</td>
+<td>人数、雇用形態、時給、シフト、勤続、承継後も残る意思。いない場合はオーナー1人で回している実態</td>
+</tr>
+<tr>
+<td>6-2</td>
+<td>オーナーの稼働</td>
+<td>週何日・何時間店に立つか。立っていない日は誰が</td>
+</tr>
+<tr>
+<td>6-3</td>
+<td>引継ぎ</td>
+<td>何か月・週何日同席できるか。常連への紹介の仕方。引継ぎ期間中の報酬の考え方</td>
+</tr>
+<tr>
+<td>6-4</td>
+<td>承継後のオーナーの関与</td>
+<td>完全に退くか、たまに立つか、店長として残る選択肢はあるか</td>
+</tr>
+<tr>
+<td>6-5</td>
+<td>店長候補</td>
+<td>知人・常連・スタッフに候補がいるか。相場観（固定給・歩合）</td>
+</tr>
+<tr>
+<td>6-6</td>
+<td>オーナーの体調・生活</td>
+<td>売却理由の本音。急ぐ事情があるか</td>
+</tr>
+</tbody>
+</table></div>
+<h3>7. 顧客・集客・ブランド</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>聞くこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7-1</td>
+<td>顧客像</td>
+<td>年齢層、性別比、職業（国分町の飲食店従事者か、会社員か、観光か）、居住地</td>
+</tr>
+<tr>
+<td>7-2</td>
+<td>来店経路</td>
+<td>紹介／Instagram／Google／通りがかり／他店からの流れ（2軒目需要）</td>
+</tr>
+<tr>
+<td>7-3</td>
+<td>Instagram</td>
+<td>運用者、投稿頻度、DM での予約数、フォロワーの質。アカウント引継ぎの方法（メール・電話番号・二段階認証）</td>
+</tr>
+<tr>
+<td>7-4</td>
+<td>Google ビジネスプロフィール</td>
+<td>オーナー確認済みか、口コミ数と評価、引継ぎ</td>
+</tr>
+<tr>
+<td>7-5</td>
+<td>店名・ロゴ</td>
+<td>「BAR8」の由来、ロゴデータの所在、看板や印刷物の権利</td>
+</tr>
+<tr>
+<td>7-6</td>
+<td>近隣との関係</td>
+<td>同じビル・近隣店との付き合い、送客関係、町内会・振興組合への加入と会費</td>
+</tr>
+<tr>
+<td>7-7</td>
+<td>競合</td>
+<td>オーナーが意識している店、客が流れる先</td>
+</tr>
+<tr>
+<td>7-8</td>
+<td>コンセプト</td>
+<td>オーナーが「変えてほしくないこと」「変えていいこと」</td>
+</tr>
+</tbody>
+</table></div>
+<h3>8. 財務・税務の記録（持ち帰る書類）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>書類</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8-1</td>
+<td>確定申告書・青色申告決算書（開業後の全期）</td>
+<td>売上・経費の全体像</td>
+</tr>
+<tr>
+<td>8-2</td>
+<td>月次の売上記録（POS 出力・日報）</td>
+<td>1 節の裏取り</td>
+</tr>
+<tr>
+<td>8-3</td>
+<td>仕入先ごとの請求書（直近6か月）</td>
+<td>2 節・3 節の裏取り</td>
+</tr>
+<tr>
+<td>8-4</td>
+<td>通帳・決済明細（事業用）</td>
+<td>入金の実態</td>
+</tr>
+<tr>
+<td>8-5</td>
+<td>借入・リース契約書、返済予定表</td>
+<td>承継対象の債務</td>
+</tr>
+<tr>
+<td>8-6</td>
+<td>未払一覧（仕入・家賃・税・社会保険）</td>
+<td>簿外の確認</td>
+</tr>
+<tr>
+<td>8-7</td>
+<td>固定資産・什器の一覧（購入時期・金額）</td>
+<td>造作譲渡の対象リストの元</td>
+</tr>
+<tr>
+<td>8-8</td>
+<td>開業時の内装工事の見積・請求書</td>
+<td>造作の価値と原状回復の目安</td>
+</tr>
+</tbody>
+</table></div>
+<h3>9. 視察当日のタイムテーブル（案）</h3>
+<ol>
+<li>営業前（明るい時間）：設備・バックヤード・ビル共用部を見る（4 節）。平面図と席数を実測</li>
+<li>ヒアリング（2〜3時間）：1→2→3→5→6→7 の順。数字は記録で裏取りしながら</li>
+<li>営業中（できれば金曜か土曜）：客層・客単価・オペレーション・オーナーの立ち位置・深夜帯の入りを観察（1-5・1-6・5-2）</li>
+<li>可能なら<strong>オーナー不在の営業日</strong>にも一度客として行く（売上剥落の見積もりの材料）</li>
+<li>帰りに書類（8 節）を預かるか、写真で控える</li>
+</ol>
+<h3>10. 視察後に決めること</h3>
+<ul>
+<li>「オーナーが抜けても残る売上」の見積もり（1-6・1-7・6-2 から）</li>
+<li>運営体制の案（誰が立つか・店長の要否）</li>
+<li>引き継ぐ契約と切り替える契約の仕分け（3 節）</li>
+<li>修繕・更新が必要な設備と概算（4 節）</li>
+<li>譲渡契約書に載せる資産リストの元（8-7）</li>
+</ul><footer>元の文書はClaude Projectのpersonal/new-project/bar8_sendai/にあるMarkdownです。このページはそこから生成しています。</footer></div></body></html>

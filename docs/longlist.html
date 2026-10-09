@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>論点ロングリスト</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"><style>
+/* Layout: 左に細い固定ナビ、右に読みものの一列。モダンな角丸カードは最小限にして、太いサンセリフと1色の差し色で締める */
+:root{--bg:#f6f6f4;--surface:#ffffff;--fg:#141414;--muted:#6b6b66;--line:#e4e4df;--accent:#e4374d;--accent-ink:#ffffff;--soft:#f0f0ec;--ok:#1f8a4c;--chip:#ebebe6;
+--font-display:'Bricolage Grotesque','Zen Kaku Gothic New',system-ui,sans-serif;--font-body:'Zen Kaku Gothic New',"Hiragino Sans","Yu Gothic",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111112;--surface:#1a1a1c;--fg:#f1f1ee;--muted:#9c9c96;--line:#2c2c30;--accent:#ff5468;--accent-ink:#111112;--soft:#202023;--ok:#5fcf8a;--chip:#26262a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111112;--surface:#1a1a1c;--fg:#f1f1ee;--muted:#9c9c96;--line:#2c2c30;--accent:#ff5468;--accent-ink:#111112;--soft:#202023;--ok:#5fcf8a;--chip:#26262a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15.5px;line-height:1.85;margin:0;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:4px}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.shell{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;max-width:1080px;margin:0 auto;padding-block:36px 80px;padding-inline:20px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:13px}
+.side .brand{font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-.02em;margin:0 0 4px}
+.side .sub{color:var(--muted);margin:0 0 20px}
+.side nav{display:grid;gap:2px}
+.side nav a{text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:6px;display:block}
+.side nav a:hover{background:var(--soft);color:var(--fg)}
+.side .foot{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
+main{min-width:0;display:grid;gap:56px}
+section{scroll-margin-top:24px}
+.eyebrow{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+h2{font-family:var(--font-body);font-weight:900;font-size:24px;line-height:1.3;letter-spacing:-.01em;margin:0 0 16px;text-wrap:balance}
+h3{font-weight:700;font-size:16px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:66ch}
+.lead{font-size:18px;line-height:1.75;color:var(--fg);max-width:60ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--chip);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:500}
+.chip.now{background:var(--accent);color:var(--accent-ink)}
+.kv{display:grid;grid-template-columns:140px minmax(0,1fr);gap:0;border-top:1px solid var(--line);font-size:15px}
+.kv dt,.kv dd{padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.kv dt{color:var(--muted);font-weight:500}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.list li{display:grid;grid-template-columns:10px minmax(0,1fr);gap:14px;align-items:start}
+.list li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:11px}
+.list b{font-weight:700}
+.stepper{display:grid;gap:0;border-left:2px solid var(--line);margin-left:9px}
+.stepper li{list-style:none;position:relative;padding:0 0 22px 26px}
+.stepper li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--line)}
+.stepper li.done::before{background:var(--ok);border-color:var(--ok)}
+.stepper li.now::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 20%,transparent)}
+.stepper .t{font-weight:700}
+.stepper .d{color:var(--muted);font-size:14px}
+.stepper .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--chip);margin-left:8px;vertical-align:2px}
+.stepper li.now .tag{background:var(--accent);color:var(--accent-ink)}
+.stepper li.done .tag{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.gate b{display:block;font-size:16px;margin-bottom:6px}
+.gate p{font-size:14px;color:var(--muted);margin:0}
+.facts{display:grid;gap:14px}
+.fact{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 18px;border-radius:10px;background:var(--soft);min-width:0}
+.fact b{font-size:16px}
+.fact p{margin:0;font-size:14.5px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;min-width:0;text-decoration:none;color:inherit;transition:border-color .15s ease,transform .15s ease}
+.doc:hover{border-color:var(--accent);transform:translateY(-2px);color:inherit}
+@media (prefers-reduced-motion:reduce){.doc{transition:none}.doc:hover{transform:none}}
+.doc .idx{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.doc h3{font-size:17px;margin:0}
+.doc p{font-size:14px;color:var(--muted);margin:0}
+.doc .go{font-weight:700;font-size:14px;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:700;background:var(--soft);white-space:nowrap}
+.doclink{font-size:13px;color:var(--muted);margin-top:8px}
+@media (max-width:760px){.shell{grid-template-columns:1fr;gap:28px}.side{position:static}.side nav{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}.kv{grid-template-columns:1fr}.kv dt{padding-bottom:0;border-bottom:0}.kv dd{padding-top:4px}}
+/* 資料ページ */
+.docpage{max-width:820px;margin:0 auto;padding-block:32px 80px;padding-inline:20px}
+.docpage .crumb{font-size:13px;color:var(--muted);margin-bottom:18px}
+.docpage h1{font-size:clamp(28px,5vw,40px);margin-bottom:24px}
+.docpage h2{font-size:21px;margin:40px 0 12px;padding-top:14px;border-top:2px solid var(--fg)}
+.docpage h3{font-size:16px;margin:24px 0 8px}
+.docpage ul,.docpage ol{padding-left:1.4em;margin:0 0 14px}
+.docpage li{margin:4px 0}
+.docpage table{margin:8px 0 18px}
+.docpage code{font-family:ui-monospace,Menlo,monospace;font-size:.9em;background:var(--soft);padding:1px 5px;border-radius:4px}
+.docpage footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style></head>
+<body><div class="docpage"><nav class="crumb"><a href="../index.html">BAR8プロジェクト ポータルに戻る</a></nav><h1>BAR8（仙台・国分町）事業承継プロジェクト 論点ロングリスト</h1>
+<p>作成：2026-10-09　更新：2026-10-09（主たる承継者を株式会社ティーツーシーに確定／承継スキーム（本体 or 子会社）を論点化／許認可の承継ルールを訂正／対価ほぼゼロ／収支は後回し／許認可DDを先行）　分類：正本</p>
+<p><strong>体制</strong>：主たる承継者＝<strong>株式会社ティーツーシー</strong>（神奈川県川崎市高津区新作4-22-13・代表取締役 鈴木健吾・2025年1月設立・機械器具設置工事、内装・外構・外装工事、修繕・リフォーム・解体工事。出典：会社サイト https://t2c-co-ltd.co.jp/ 2026-10-09取得）。承継の主体を同社本体にするか、同社が設立する子会社にするかは §2 の論点。</p>
+<h3>0. 対象の現時点の把握（出典：Instagram @bar8_2025・2026-10-09 取得）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>店名</td>
+<td>BAR8</td>
+</tr>
+<tr>
+<td>所在地</td>
+<td>仙台市青葉区国分町3-6-6 小野ビル4F（定禅寺通りそば・雑居ビル上階の隠れ家型）</td>
+</tr>
+<tr>
+<td>業態</td>
+<td>バー（ワインバー）。「お一人でも気軽に」のフランクな雰囲気</td>
+</tr>
+<tr>
+<td>開業</td>
+<td>2026-08-26 に記念日投稿あり → 2025-08-26 開業と推定【推定】</td>
+</tr>
+<tr>
+<td>規模</td>
+<td>席数・営業時間・従業員は未取得【未確認】</td>
+</tr>
+<tr>
+<td>集客</td>
+<td>Instagram フォロワー150人・投稿は営業日告知中心</td>
+</tr>
+<tr>
+<td>経営形態</td>
+<td>個人事業主（本人申告）</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>最初に押さえること</strong>：個人事業主の店を買う＝会社を買うのではなく、<strong>資産（内装・什器・在庫）と契約上の地位（賃借権・取引先）と営業権（屋号・SNS・常連）を個別に引き継ぐ「事業譲渡」</strong>になる。許認可は、<strong>飲食店営業許可は2023-12-13以降の全部譲渡なら「地位承継届」で引き継げる</strong>（初版の「承継不可」は誤り・2026-10-09訂正）。<strong>深夜酒類提供の届出は引き継げず譲受側が新規届出</strong>。詳細は DD_許認可法務チェックリスト.md。</p>
+<h3>1. 目的と前提（主たる承継者が最初に決める）</h3>
+<ul>
+<li>目的：承継者自身の場（拠点）として引き継ぐ。投資（利回り）や多店舗化は目的としない（2026-10-09 確定）</li>
+<li><strong>誰が店に立つのか</strong>：承継者が日常的に店に立てないなら、「雇われ店長」か「現オーナーの残留」が前提になる。遠隔オーナー型の小規模バーは、現金管理と人の離脱が最大リスク</li>
+<li>現オーナーが売る理由（本音）：体力・資金・転居・不採算。理由によって「売上の再現性」の見立てが変わる</li>
+<li>時間軸：いつまでに決めるか、クロージング希望日、引継ぎ期間</li>
+<li>撤退条件：いくらまでなら失ってよいか（上限額）を先に決める</li>
+</ul>
+<h3>2. スキーム（買い方の設計）</h3>
+<ul>
+<li><strong>承継スキーム（最重要論点）</strong>：主たる承継者が株式会社ティーツーシー（以下 T2C）であることを前提に、次の2案を比較して決める</li>
+<li><strong>案A：T2C 本体で事業を譲り受ける</strong>。飲食店営業許可の譲受人・賃貸借の名義人・深夜酒類提供の届出者はいずれも T2C。利点＝設立コストと手続きが最小、既存法人の信用と口座を使える。論点＝定款の事業目的に飲食業の追加（登記）、建設業の本業と飲食業が同一法人に同居することの信用・税務・労務上の影響、店の損益が本体決算に直結、飲食業の責任（食中毒・事故）が本体に及ぶ</li>
+<li><strong>案B：T2C が子会社（新設法人）を設立し、そこで譲り受ける</strong>。他の出資者（オーナー候補）が子会社に出資・参画できる。利点＝本業とのリスク分離、出資者の持分設計が可能、将来の売却・撤退が切り分けやすい。論点＝設立費用（合同会社なら登録免許税6万円〜・株式会社なら約20万円〜）と維持費（法人住民税均等割 年7万円〜・税理士）、資本金と親子の出資比率、役員構成、株主間（社員間）契約（意思決定・追加出資・退出・持分譲渡・競業避止）、子会社の信用が無いため賃貸人が親会社の連帯保証を求める可能性、許認可はすべて子会社名義で取得</li>
+<li>判断基準＝①他の出資者を入れるか（入れるなら案B）②本業との分離をどこまで重視するか ③賃貸人が受け入れやすいのはどちらか ④設立・維持コストを対価ゼロの案件で負担する価値があるか</li>
+<li>どちらでも<strong>譲受人は法人</strong>になるため、保健所に「法人への譲渡で地位承継が使えるか」を最初に確認する（DD 許認可編 B3）</li>
+<li><strong>出資者間の取り決め（案Bの場合）</strong>：出資比率、意思決定（日常／重要事項）、追加出資義務、利益分配、退出ルール（持分の買取り価格の決め方）、競業避止を設立時に書面にする</li>
+<li><strong>譲渡の形</strong>：事業譲渡契約（資産・契約・営業権の個別承継）＋賃貸借契約の名義変更（または新規契約）＋許認可の新規取得</li>
+<li><strong>現オーナーの関与</strong>：引継ぎ期間（例：3か月は週◯日同席）、残留して店長として雇うか、完全退出か</li>
+<li><strong>資金</strong>：自己資金／日本政策金融公庫（創業・事業承継）／自治体の事業承継補助の有無【要確認】</li>
+</ul>
+<h3>3. デューデリジェンス（DD）の中身</h3>
+<h4>3-1. 財務・税務</h4>
+<ul>
+<li>月次の売上・客数・客単価（開業からの全期間。開業が2025-08なら1年強分しかない＝季節性の検証が弱い点を認識）</li>
+<li>現金商売の実態確認：POS／レジ記録、銀行入金、キャッシュレス決済の明細、仕入の請求書。申告書と実態の差を見る</li>
+<li>原価率・FLコスト（食材酒類原価＋人件費）、家賃、水光熱、通信、SNS広告、消耗品</li>
+<li>確定申告書（開業後の全期分）・青色申告決算書・帳簿</li>
+<li>在庫：ワイン・酒類の在庫リスト、評価（仕入値・劣化・デッドストック）</li>
+<li>債務：リース（製氷機・冷蔵庫・POS等）、借入、未払（仕入先・家賃・税）</li>
+<li>売上の「人」依存度：常連の比率、オーナー不在日の売上。<strong>オーナーが抜けた後の売上剥落の見積もり</strong>がバリュエーションの核</li>
+</ul>
+<h4>3-2. 法務・契約</h4>
+<ul>
+<li><strong>賃貸借契約書</strong>：契約者名義、期間・更新、賃料・共益費、保証金と返還条件、<strong>譲渡・転貸の禁止条項と名義変更の可否（オーナー承諾）</strong>、用途制限（深夜営業・バー可か）、原状回復義務、解約予告</li>
+<li>ビル：小野ビルの管理状況、他テナント（風俗・トラブル）、エレベーター・消防設備、建物の築年</li>
+<li>取引先契約：酒類卸、食材、音楽（JASRAC等の利用許諾）、決済端末、予約サイト</li>
+<li>屋号・商標・SNS：BAR8 の名称使用権、Instagram アカウントの引継ぎ（運用ルール・パスワード・本人確認）、Google ビジネスプロフィール</li>
+<li>従業員：雇用の有無、雇用契約・労務（社会保険・労働時間）、承継するか</li>
+<li>訴訟・クレーム・近隣トラブルの有無</li>
+<li>現オーナーの競業避止（期間・地域＝国分町周辺）と顧客持ち出しの防止</li>
+</ul>
+<h4>3-3. 許認可・コンプライアンス（引き継げない前提）</h4>
+<ul>
+<li><strong>飲食店営業許可（保健所）</strong>：2023-12-13以降の事業譲渡（営業の全部）は「譲渡による地位承継届」で承継可（仙台市 様式第8号・譲渡契約書の写し添付）。法人への譲渡の可否は青葉区衛生課に要確認。食品衛生責任者の選任</li>
+<li><strong>深夜酒類提供飲食店営業の届出（警察署）</strong>：0時以降に酒類を提供するなら必須。営業者に紐づくため承継不可＝譲受側が営業開始10日前までに新規届出（飲食店営業許可証の写しが必要＝保健所の承継が先）</li>
+<li><strong>風営法の該当性</strong>：「接待」（客の隣に座って談笑等）があると風俗営業（1号）許可が必要になり、話が別物になる。現状の営業実態を確認</li>
+<li>消防：防火管理者（収容人数による）、防火対象物使用開始届、避難経路</li>
+<li>酒類販売業免許：店内提供は不要。持ち帰り販売・通販をするなら必要</li>
+<li>税務：開業届／法人設立届、消費税（インボイス登録の要否）、償却資産</li>
+<li>看板・騒音・ごみ等の条例</li>
+</ul>
+<h4>3-4. ビジネス・商圏</h4>
+<ul>
+<li>国分町・定禅寺通りの商圏、同業（ワインバー）の密度、4F雑居ビルの集客ハンデ</li>
+<li>客層（年齢・常連比率・観光客）、来店動機（オーナー個人／ワインの品揃え／価格）</li>
+<li>SNS 以外の集客導線（口コミ・紹介・予約サイト）</li>
+<li>価格帯と原価、提供メニューの再現可能性（オーナーの技量に依存するか）</li>
+<li>「居抜き物件として借りた場合」との比較：同条件の居抜きがいくらで借りられるかが、営業権に払う価格の上限を決める</li>
+</ul>
+<h4>3-5. 物件・設備</h4>
+<ul>
+<li>内装・什器・設備の所有者（オーナー所有か、前テナントからの造作か、リース品か）</li>
+<li>造作譲渡の対象リスト、老朽化と更新費用（製氷機・冷蔵庫・空調・給排水）</li>
+<li>原状回復の範囲と見積もり（退去時コストは買収時点で把握）</li>
+</ul>
+<h4>3-6. 人・運営</h4>
+<ul>
+<li>現オーナーの引継ぎ可能期間・意欲</li>
+<li>店長候補の有無（現スタッフ・知人・採用）、報酬設計（固定＋歩合）</li>
+<li>遠隔管理の仕組み：POS・キャッシュレス比率の引き上げ・日次報告・棚卸し</li>
+</ul>
+<h3>4. 価格の考え方</h3>
+<ul>
+<li>小規模バーの譲渡価格は「造作譲渡料＋在庫＋営業権」。営業権は売上の再現性次第で、<strong>オーナー個人に紐づく常連売上は原則ゼロ評価に近い</strong></li>
+<li>目安はあるが相場は幅が大きい。「同条件の居抜き物件の取得費」と「現オーナー抜きで再現できる月次利益×回収したい月数」の二つから上限を置く【推定・相場は要調査】</li>
+<li>価格調整条項：引継ぎ期間中の売上実績で一部後払い（アーンアウト的な設計）にできると、売上剥落リスクを売主と分担できる</li>
+</ul>
+<h3>5. 契約（事業譲渡契約の論点）</h3>
+<ul>
+<li>譲渡対象の特定（資産リスト・契約・屋号・SNS・レシピ・顧客情報の扱い）</li>
+<li>表明保証（簿外債務なし、許認可上の違反なし、賃貸人の承諾取得）</li>
+<li>引継ぎ義務（期間・内容）、競業避止、従業員の扱い</li>
+<li>対価と支払条件（手付・残金・価格調整）、クロージング条件（賃貸人承諾、許認可の目処）</li>
+<li>解除・損害賠償、秘密保持</li>
+</ul>
+<h3>6. 収支計画（買収後3年）</h3>
+<ul>
+<li>初期：譲渡対価、許認可費用、名義変更費用、保証金差替え、運転資金（3か月分）、法人設立費</li>
+<li>月次：売上シナリオ（現状維持／オーナー離脱で▲30%／施策後）、固定費、店長人件費、役員報酬の有無、案Bなら子会社の維持費</li>
+<li>損益分岐売上と、撤退ライン（何か月連続赤字で止めるか）</li>
+</ul>
+<h3>7. タイムライン（案）</h3>
+<ol>
+<li>主たる承継者が目的・上限額・運営体制・承継スキーム（案A／案B）を決める（本書 §1〜2）</li>
+<li>売主へ資料依頼（§9のリスト）、秘密保持の取り交わし</li>
+<li>現地確認（営業日の客入り・オーナー不在日の様子・ビル）</li>
+<li>DD（§3）→ 価格提示 → 基本合意</li>
+<li>賃貸人への打診・承諾、許認可の事前相談（保健所・警察署）</li>
+<li>事業譲渡契約の締結、法人設立、許認可申請</li>
+<li>引継ぎ期間 → クロージング → 名義変更・届出完了</li>
+</ol>
+<h3>8. リスク一覧（優先順）</h3>
+<ol>
+<li>オーナー離脱後の売上剥落（常連依存）</li>
+<li>賃貸人が名義変更を認めない／条件が変わる</li>
+<li>遠隔オーナーによる現金管理・人の離脱</li>
+<li>風営法の該当性の誤認（接待があれば別許可）</li>
+<li>案Bで出資者間の取り決めが無いまま進むこと／案Aで本業と飲食業のリスクが混ざること</li>
+<li>ビル・設備の老朽化と退去コスト</li>
+<li>開業1年強でデータが薄く、季節性・持続性が読めない</li>
+</ol>
+<h3>9. 売主への資料依頼リスト</h3>
+<ul>
+<li>確定申告書・青色申告決算書（全期）、月次売上・客数（開業以来）、POS/決済明細、仕入請求書</li>
+<li>賃貸借契約書（原本）、保証金預り証、ビル管理規約</li>
+<li>許認可関係（飲食店営業許可証、深夜酒類提供届出控え、消防関係）</li>
+<li>資産リスト（内装・什器・設備・在庫）、リース契約、借入契約</li>
+<li>従業員の雇用契約、シフト実績</li>
+<li>SNS・Google ビジネスプロフィールの管理権限情報（引継ぎ方法）</li>
+<li>売却理由と希望条件（価格・時期・引継ぎ可能期間）</li>
+</ul>
+<h3>10. 未確認事項（取得でき次第更新）</h3>
+<ul>
+<li>営業時間（深夜営業の有無）、席数、従業員の有無、開業日の確定</li>
+<li>現オーナーの売却理由・希望価格</li>
+<li>賃貸借の名義変更可否</li>
+<li>風営法の該当性（接待の有無）</li>
+<li>承継スキーム（案A本体／案B子会社）の選択と、案Bの場合の出資者・比率・役員／店に立つ人と店長候補の有無</li>
+</ul>
+<h3>11. Go／No-Go の関門</h3>
+<ul>
+<li>賃貸人の承諾が得られない → No-Go</li>
+<li>風俗営業に該当し許可取得が現実的でない → No-Go</li>
+<li>オーナー不在日の売上が損益分岐を大きく下回り、店長を置いても埋まらない → 価格を造作譲渡相当まで下げるか No-Go</li>
+<li>承継スキームと運営体制（誰が店に立つか）が決まらない → 着手しない</li>
+</ul>
+<h3>関連</h3>
+<ul>
+<li>関係者向けポータル（Artifact・非公開リンク・共有は本人がShareメニューから）：https://claude.ai/artifact/LpNjFaVBuuTGzjUgm7CN8m</li>
+<li>ポータルの資料ページは本ファイル・DD_許認可法務チェックリスト.md・現地視察・ヒアリング項目.md から生成（更新したらポータルも再生成する）</li>
+</ul><footer>元の文書はClaude Projectのpersonal/new-project/bar8_sendai/にあるMarkdownです。このページはそこから生成しています。</footer></div></body></html>
